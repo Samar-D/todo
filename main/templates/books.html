@@ -1,11 +1,49 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Books</title>
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
 </head>
 <body>
+    <section>
+
+        <div class="create_container">
+            <input
+            class="create_input"
+            type="text"
+            placeholder="Напишите сюда название книги"
+            />
+            <button class="create_button">Найти</button>
+        </div>
+
+        <div class="todo_container">
+
+            {% for books in books_shop %}
+            <div class="todo_item">
+                <div class="todo_item_header">
+                    <label class="chechbox_container">
+                        <input type="checkbox"/>
+                        <span class="checkmark"></span>
+                    </label>
+                    <h5>{{ books.title }} <br /> <p>{{ books.subtitle }}</p> <br /> <p>{{ books.description }}</p></h5>
+                </div>
+                <div class="todo_item_footer">
+                    <p>{{ todo.created_at }}</p>
+                    <div class="action_buttons">
+                        <img src="./icons/unmarked.png">
+                        <img src="./icons/delete.jpg">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
     
 </body>
 </html>

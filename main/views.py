@@ -28,4 +28,4 @@ def page3(request):
 
 def books(request):
     books_shop = Books.objects.all()
-    return render(request, "books.html", {"bools_shop": books_shop})
+    return render(request, "books.html", {"books_shop": books_shop})
