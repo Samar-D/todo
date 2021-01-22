@@ -27,4 +27,5 @@ def page3(request):
     return render(request, "page3.html")
 
 def books(request):
-    return render(request, "books.html")
+    books_shop = Books.objects.all()
+    return render(request, "books.html", {"bools_shop": books_shop})
