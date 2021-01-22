@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import ToDo
+from .models import Books
 
 # Create your views here.
 
@@ -24,3 +25,6 @@ def page2(request):
 
 def page3(request):
     return render(request, "page3.html")
+
+def books(request):
+    return render(request, "books.html")
