@@ -13,12 +13,17 @@
     <section>
 
         <div class="create_container">
-            <input
-            class="create_input"
-            type="text"
-            placeholder="Напишите сюда название книги"
-            />
-            <button class="create_button">Найти</button>
+            <form action="{% url 'add-books' %}" method="POST">
+                {% csrf_token %}
+                <input class="create_input" type="text" placeholder="Title" name="books_title"/>
+                <input class="create_input" type="text" placeholder="Subtitle" name="books_subtitle"/>
+                <input class="create_input" type="text" placeholder="Description" name="books_description"/>
+                <input class="create_input" type="text" placeholder="Price" name="books_price"/>
+                <input class="create_input" type="text" placeholder="Genre" name="books_genre"/>
+                <input class="create_input" type="text" placeholder="Author" name="books_author"/>
+                <input class="create_input" type="text" placeholder="Year" name="books_year"/>
+                <button class="create_button">Добавить</button>
+            </form>
         </div>
 
         <div class="todo_container">
@@ -33,7 +38,7 @@
                     <h5>{{ books.title }} <br /> <p>{{ books.subtitle }}</p> <br /> <p>{{ books.description }}</p></h5>
                 </div>
                 <div class="todo_item_footer">
-                    <p>{{ todo.created_at }}</p>
+                    <p>{{ books.year }}</p>
                     <div class="action_buttons">
                         <img src="{% static './icons/unmarked.png' %}">
                         <img src="{% static './icons/delete.jpg' %}">

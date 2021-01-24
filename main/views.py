@@ -38,3 +38,18 @@ def add_todo(request):
     #print(form)
     # return HttpResponse("Форма получена")
     return redirect(test)
+
+def add_books(request):
+    form = request.POST
+    title = form["books_title"]
+    books = Books(title=title)
+    books.save()
+    # return redirect(books)
+    # subtitle = form["books_subtitle"]
+    # books = Books(sutitle=subtitle)  
+    # description = 
+    # price = 
+    # genre = 
+    # author = 
+    # year = 
+    return HttpResponse("Форма получена")
