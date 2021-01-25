@@ -52,3 +52,8 @@ def add_books(request):
     books.save()
     # return redirect(books)
     return HttpResponse("Форма получена")
+
+def delete_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.delete()
+    return redirect(test)
