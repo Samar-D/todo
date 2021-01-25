@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
-    <link rel="stylesheet" href="{% static 'styles/index.css' %}" />
-    <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}" />
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/checkbox.css' %}">
 </head>
 <body>
     <section>
@@ -18,10 +18,10 @@
                 <input class="create_input" type="text" placeholder="Title" name="books_title"/>
                 <input class="create_input" type="text" placeholder="Subtitle" name="books_subtitle"/>
                 <input class="create_input" type="text" placeholder="Description" name="books_description"/>
-                <input class="create_input" type="text" placeholder="Price" name="books_price"/>
+                <input class="create_input" type="number" placeholder="Price" name="books_price"/>
                 <input class="create_input" type="text" placeholder="Genre" name="books_genre"/>
                 <input class="create_input" type="text" placeholder="Author" name="books_author"/>
-                <input class="create_input" type="text" placeholder="Year" name="books_year"/>
+                <input class="create_input" type="number" placeholder="Year" name="books_year"/>
                 <button class="create_button">Добавить</button>
             </form>
         </div>
@@ -29,21 +29,33 @@
         <div class="todo_container">
 
             {% for books in books_shop %}
-            <div class="todo_item">
+            <div class="todo_item
+                {% if books.is_favorite %}
+                    marked
+                {% endif %}
+                ">
                 <div class="todo_item_header">
                     <label class="chechbox_container">
                         <input type="checkbox"/>
                         <span class="checkmark"></span>
                     </label>
-                    <h5>{{ books.title }} <br /> <p>{{ books.subtitle }}</p> <br /> <p>{{ books.description }}</p></h5>
+                    <h5>{{ books.title }} <br /> <p>{{ book.id }} {{ books.subtitle }}</p> <br /> <p>{{ books.description }}</p></h5>
                 </div>
                 <div class="todo_item_footer">
                     <p>{{ books.year }}</p>
                     <div class="action_buttons">
-                        <img src="{% static './icons/unmarked.png' %}">
-                        <img src="{% static './icons/delete.jpg' %}">
+                        {% if books.is_favorite %}
+                            <a href="{% url 'unmark-books' books.id %}"><img src="{% static './icons/marked.png' %}"></a>
+                        {% else %}
+                            <a href="{% url 'mark-books' books.id %}"><img src="{% static './icons/unmarked.png' %}"></a>
+                        {% endif %}
+
+                        <a href="{% url 'delete-books' books.id %}"><img src="{% static './icons/delete.jpg' %}"></a>
                     </div>
                 </div>
+                <div>
+                    <a href="{% url 'books-detail' books.id %}">Подробно</a>
+                </div>                
             </div>
             {% endfor %}
         </div>

@@ -1,6 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-from .models import ToDo
-from .models import Books
+from .models import ToDo, Books
 
 # Create your views here.
 
@@ -48,10 +47,10 @@ def add_books(request):
     genre = form["books_genre"]
     author = form["books_author"]
     year = form["books_year"]
-    books = Books(title=title, subtitle=subtitle, description=description, price=price, genre=genre, author=author, year=year)
-    books.save()
-    # return redirect(books)
-    return HttpResponse("Форма получена")
+    book = Books(title=title, subtitle=subtitle, description=description, price=price, genre=genre, author=author, year=year)
+    book.save()
+    return redirect(books)
+    # return HttpResponse("Форма получена")
 
 def delete_todo(request, id):
     todo = ToDo.objects.get(id=id)
@@ -63,3 +62,24 @@ def mark_todo(request, id):
     todo.is_favorite = True
     todo.save()
     return redirect(test)
+
+def mark_books(request, id):
+    book = Books.objects.get(id=id)
+    book.is_favorite = True
+    book.save()
+    return redirect(books)
+
+def unmark_books(request, id):
+    book = Books.objects.get(id=id)
+    book.is_favorite = False
+    book.save()
+    return redirect(books)
+
+def delete_books(request, id):
+    book = Books.objects.get(id=id)
+    book.delete()
+    return redirect(books)
+
+def books_detail(request, id):
+    books_detail = Books.objects.get(id=id)
+    return render(request, "books_detail.html", {"books_detail": books_detail})
