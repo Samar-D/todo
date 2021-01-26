@@ -83,3 +83,9 @@ def delete_books(request, id):
 def books_detail(request, id):
     books_detail = Books.objects.get(id=id)
     return render(request, "books_detail.html", {"books_detail": books_detail})
+
+def close_todo(request, id):
+    todo = ToDo.objects.get(id=id)
+    todo.is_closed = not todo.is_closed
+    todo.save()
+    return redirect(test)
